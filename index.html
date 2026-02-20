@@ -126,6 +126,15 @@
     .menu-sub-item:hover { color: #c8cdd8; }
     .menu-sub-item.active { color: #7eb8f7; }
 
+    /* 새 탭 배지 */
+    .new-tab-badge {
+      margin-left: auto;
+      font-size: 11px;
+      color: #5a9cf7;
+      opacity: 0.7;
+    }
+    .menu-item:hover .new-tab-badge { opacity: 1; }
+
     /* 구분선 */
     .menu-divider {
       height: 1px;
@@ -194,15 +203,17 @@
       <div class="menu-item" onclick="loadPage('https://www.rapidtables.org/ko/web/color/RGB_Color.html', 'RGB 색상 코드', this)">
         <span class="dot"></span>1-1. RGB 색상 코드
       </div>
-      <div class="menu-item" onclick="loadPage('https://askmath.kosac.re.kr/ai/imageAnaly/imageAnalysis.do?menuPos=6', 'ask math AI 웹 실험실', this)">
-        <span class="dot"></span>1-2. ask math AI 웹 실험실
+      <div class="menu-item" onclick="openNewTab('https://askmath.kosac.re.kr/ai/imageAnaly/imageAnalysis.do?menuPos=6', this)">
+        <span class="dot"></span>1-2. ask math AI 웹 실험실 <span class="new-tab-badge">↗</span>
       </div>
 
       <!-- 1-3 소그룹 -->
       <div class="menu-item" style="cursor:default; color:#7a8090;">
         <span class="dot"></span>1-3. 행렬 통한 이미지 구현
       </div>
-      <div class="menu-item menu-sub-item" onclick="loadPage('https://docs.google.com/spreadsheets/d/1pZk-30AEEI6oWd0Q0ABrPDnTLuRPmN822_r12J7NY9E/copy', '구글 스프레드 시트', this)">
+      <div class="menu-item menu-sub-item" onclick="openNewTab('https://docs.google.com/spreadsheets/d/1pZk-30AEEI6oWd0Q0ABrPDnTLuRPmN822_r12J7NY9E/copy', this)">
+        <span class="dot"></span>└ 구글 스프레드 시트 <span class="new-tab-badge">↗</span>
+      </div>
         <span class="dot"></span>└ 구글 스프레드 시트
       </div>
       <div class="menu-item menu-sub-item" onclick="loadPage('https://ecodings.github.io/mtx2img/', '구글 계정 없을 경우', this)">
@@ -249,6 +260,12 @@
   function toggleDropdown() {
     const isOpen = menu.classList.toggle('open');
     btn.classList.toggle('open', isOpen);
+  }
+
+  function openNewTab(url, el) {
+    window.open(url, '_blank');
+    menu.classList.remove('open');
+    btn.classList.remove('open');
   }
 
   function loadPage(url, label, el) {
